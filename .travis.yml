@@ -1,0 +1,18 @@
+language: go
+
+distro: trusty
+
+services: docker
+
+go:
+    - 1.6
+
+install:
+    - go get github.com/tools/godep
+
+script:
+    - cd "nginx-controller"
+    - PREFIX="munnerz/nginx-ingress" make container
+
+after_success:
+    - if [ "$TRAVIS_BRANCH" = "master" -a "$TRAVIS_PULL_REQUEST" = "false" ]; PREFIX="munnerz/nginx-ingress" make push; fi

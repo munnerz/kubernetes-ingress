@@ -1,7 +1,6 @@
 all: push
 
 TAG = 0.1
-PREFIX = nginxdemos/nginx-ingress
 
 nginx-ingress:
 	CGO_ENABLED=0 GOOS=linux godep go build -a -installsuffix cgo -ldflags '-w' -o nginx-ingress *.go
