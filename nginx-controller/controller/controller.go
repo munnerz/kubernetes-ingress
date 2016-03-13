@@ -308,7 +308,12 @@ func (lbc *LoadBalancerController) updateNGINX(name string, ing *extensions.Ingr
 				}
 			}
 
-			loc := nginx.Location{Path: path.Path, Upstream: ups}
+			ssl := false
+			if path.Backend.ServicePort.IntValue() == 443 || path.Backend.ServicePort.String() == "https" {
+				ssl = true
+			}
+
+			loc := nginx.Location{Path: path.Path, SSL: ssl, Upstream: ups}
 			locations = append(locations, loc)
 			upstreams = append(upstreams, ups)
 		}
