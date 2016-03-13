@@ -24,6 +24,6 @@ server {
 	{{range $location := $server.Locations}}
   location {{$location.Path}} {
     proxy_set_header Host $host;
-    proxy_pass http://{{$location.Upstream.Name}};
+    proxy_pass http{{ if $location.SSL}}s{{end}}://{{$location.Upstream.Name}};
   }{{end}}
 }{{end}}

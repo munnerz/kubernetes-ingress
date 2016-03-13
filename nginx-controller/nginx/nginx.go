@@ -47,6 +47,7 @@ type Server struct {
 // Location describes an NGINX location
 type Location struct {
 	Path     string
+	SSL      bool
 	Upstream Upstream
 }
 
